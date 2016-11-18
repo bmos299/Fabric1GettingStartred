@@ -1,0 +1,383 @@
+swagger: "2.0"
+info:
+  version: "0.0.1"
+  title: Hyperledger Fabric Roles
+  description: Clark's responisbility
+# during dev, should point to your local machine
+host: localhost:8080
+#host: 10.120.223.35:8080
+# basePath prefixes all resource paths
+basePath: /
+#
+schemes:
+  - http
+# format of bodies a client can send (Content-Type)
+consumes:
+  - application/json
+# format of the responses to the client (Accepts)
+produces:
+  - application/json
+paths:
+  /createBlockchainNetwork:
+    x-swagger-router-controller: create
+    post:
+      tags:
+        - Clark (Network Starter)    
+      description: Test the network API;
+      # used as the method name of the controller
+      operationId: create
+      parameters:
+        - name: name
+          in: query
+          description: The json file name of the network to be created
+          required: false
+          type: string
+          default: network-cfg.json
+      responses:
+        "200":
+          description: Success
+          schema:
+            # a pointer to a definition
+            $ref: "#/definitions/CreateResponse"
+        # responses may fall through to errors
+        default:
+          description: Error
+          schema:
+            $ref: "#/definitions/ErrorResponse"
+  /createBlockchainNetwork-nPeers:
+    x-swagger-router-controller: createN
+    post:
+      tags:
+        - Clark (Network Starter)    
+      description: Test the customerized network API;
+      # used as the method name of the controller
+      operationId: createN
+      parameters:
+        - name: name
+          in: query
+          description: The json file name of the network to be created
+          required: false
+          type: string
+          default: network-cfg3.json
+        - name: orderers
+          in: query
+          description: The number of orderer of the network to be created
+          required: false
+          type: integer
+          default: 1
+        - name: peers
+          in: query
+          description: The number of peers of the network to be created
+          required: false
+          type: integer
+          default: 2
+      responses:
+        "200":
+          description: Success
+          schema:
+            # a pointer to a definition
+            $ref: "#/definitions/CreateResponse"
+        # responses may fall through to errors
+        default:
+          description: Error
+          schema:
+            $ref: "#/definitions/ErrorResponse"
+  /addPeers:
+    x-swagger-router-controller: create
+    post:
+      tags:
+        - Clark (Network Starter)
+      description: Test the network API
+      # used as the method name of the controller
+      operationId: create
+      parameters:
+        - name: name
+          in: query
+          description: The json file name of the network to be created
+          required: false
+          type: string
+          default: network-cfg.json
+      responses:
+        "200":
+          description: Success
+          schema:
+            # a pointer to a definition
+            $ref: "#/definitions/CreateResponse"
+        # responses may fall through to errors
+        default:
+          description: Error
+          schema:
+            $ref: "#/definitions/ErrorResponse"
+  /delelePeers:
+    x-swagger-router-controller: create
+    post:
+      tags:
+        - Clark (Network Starter)
+      description: Test the network API
+      # used as the method name of the controller
+      operationId: create
+      parameters:
+        - name: name
+          in: query
+          description: The json file name of the network to be created
+          required: false
+          type: string
+          default: network-cfg.json
+      responses:
+        "200":
+          description: Success
+          schema:
+            # a pointer to a definition
+            $ref: "#/definitions/CreateResponse"
+        # responses may fall through to errors
+        default:
+          description: Error
+          schema:
+            $ref: "#/definitions/ErrorResponse"
+  /concensusCloud:
+    x-swagger-router-controller: create
+    post:
+      tags:
+        - Clark (Network Starter)
+      description: Test the network API
+      # used as the method name of the controller
+      operationId: create
+      parameters:
+        - name: name
+          in: query
+          description: The json file name of the network to be created
+          required: false
+          type: string
+          default: network-cfg.json
+      responses:
+        "200":
+          description: Success
+          schema:
+            # a pointer to a definition
+            $ref: "#/definitions/CreateResponse"
+        # responses may fall through to errors
+        default:
+          description: Error
+          schema:
+            $ref: "#/definitions/ErrorResponse"
+  /IdentityMgmt:
+    x-swagger-router-controller: create
+    post:
+      tags:
+        - Clark (Network Starter)
+      description: Test the network API
+      # used as the method name of the controller
+      operationId: create
+      parameters:
+        - name: name
+          in: query
+          description: The json file name of the network to be created
+          required: false
+          type: string
+          default: network-cfg.json
+      responses:
+        "200":
+          description: Success
+          schema:
+            # a pointer to a definition
+            $ref: "#/definitions/CreateResponse"
+        # responses may fall through to errors
+        default:
+          description: Error
+          schema:
+            $ref: "#/definitions/ErrorResponse"
+  /enroll:
+    x-swagger-router-controller: enroll
+    post:
+      tags:
+        - Clark (Network Starter)
+        - Lewis (Application developer)
+      description: Test the enroll API
+      # used as the method name of the controller
+      operationId: enroll
+      parameters:
+        - name: name
+          in: query
+          description: The name of the person to enroll
+          required: false
+          type: string
+          default: admin
+        - name: password
+          in: query
+          description: The password for the person to enroll
+          required: false
+          type: string
+          default: Xurw3yU9zI0l
+      responses:
+        "200":
+          description: Success
+          schema:
+            # a pointer to a definition
+            $ref: "#/definitions/EnrollResponse"
+        # responses may fall through to errors
+        default:
+          description: Error
+          schema:
+            $ref: "#/definitions/ErrorResponse"
+  /deploy:
+    x-swagger-router-controller: deploy
+    post:
+      tags:
+        - Clark (Network Starter)
+      description: Test the deploy API
+      # used as the method name of the controller
+      operationId: deploy
+      parameters:
+        - name: name
+          in: query
+          description: The name of the user who is doing the deploy
+          required: false
+          default: admin
+          type: string
+        - name: chaincodename
+          in: query
+          description: The name of the chain code to be deployed
+          required: false
+          default: mycc
+          type: string
+        - name: chaincodepath
+          in: query
+          description: The name of the chain code to be deployed
+          required: false
+          default: chaincode
+          type: string
+        - name: functionname
+          in: query
+          description: The arguments for deploy
+          required: false
+          default: init
+          type: string
+        - name: args
+          in: query
+          description: The arguments for deploy
+          required: false
+          default: a,1000,b,2000
+          type: string         
+      responses:
+        "200":
+          description: Success
+          schema:
+            # a pointer to a definition
+            $ref: "#/definitions/DeployResponse"
+        # responses may fall through to errors
+        default:
+          description: Error
+          schema:
+            $ref: "#/definitions/ErrorResponse"
+  /invoke:
+    x-swagger-router-controller: invoke
+    post:
+      tags:
+        - Lewis (Application developer)
+      description: Test the invoke API
+      # used as the method name of the controller
+      operationId: invoke
+      parameters:
+        - name: name
+          in: query
+          description: The name of the user who is doing the invoke
+          required: false
+          default: admin
+          type: string
+        - name: chaincodename
+          in: query
+          description: The name of the chain code to be invoked
+          required: false
+          default: mycc
+          type: string
+        - name: args
+          in: query
+          description: The arguments for this function
+          type: string
+          default: [move, a, b, 100]
+      responses:
+        "200":
+          description: Success
+          schema:
+            # a pointer to a definition
+            $ref: "#/definitions/InvokeResponse"
+        # responses may fall through to errors
+        default:
+          description: Error
+          schema:
+            $ref: "#/definitions/ErrorResponse"
+  /query:
+    x-swagger-router-controller: query
+    get:
+      tags:
+        - Lewis (Application developer)
+      description: Returns 'Hello' to the caller
+      # used as the method name of the controller
+      operationId: query
+      parameters:
+        - name: name
+          in: query
+          description: The name of the user who is doing the invoke
+          required: false
+          default: admin
+          type: string
+        - name: chaincodename
+          in: query
+          description: The name of the chain code to be invoked
+          required: false
+          default: mycc
+          type: string
+        - name: args
+          in: query
+          description: The arguments for this query
+          type: string
+          default: [query,b]
+      responses:
+        "200":
+          description: Success
+          schema:
+            # a pointer to a definition
+            $ref: "#/definitions/QueryResponse"
+        # responses may fall through to errors
+        default:
+          description: Error
+          schema:
+            $ref: "#/definitions/ErrorResponse"
+# complex objects have schema definitions
+definitions:
+  EnrollResponse:
+    required:
+      - message
+    properties:
+      message:
+        type: string
+  InvokeResponse:
+    required:
+      - message
+    properties:
+      message:
+        type: string
+  DeployResponse:
+    required:
+      - message
+    properties:
+      message:
+        type: string
+  QueryResponse:
+    required:
+      - message
+    properties:
+      message:
+        type: string
+  ErrorResponse:
+    required:
+      - message
+    properties:
+      message:
+        type: string
+  CreateResponse:
+    required:
+      - message
+    properties:
+      message:
+        type: string
